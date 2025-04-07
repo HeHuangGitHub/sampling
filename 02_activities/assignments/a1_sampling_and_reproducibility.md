@@ -13,8 +13,23 @@ Alter the code so that it is reproducible. Describe the changes you made to the 
 # Author: YOUR NAME
 
 ```
-Please write your explanation here...
+Please write your explanation here...  
+A subset of people was sampled as infected by COVID.  
+The sampling frame was the DataFrame created at the beginning (events = ['wedding'] * 200 + ['brunch'] * 800).  
+200 people attended the wedding and 800 people attended a brunch. Each person had a 10% chance of being infected. The sample size was 10% of the 1,000 people, which was 100 persons.  
+The sample was selected by simple random sampling.  
+infected_indices = np.random.choice(ppl.index, size=int(len(ppl) * ATTACK_RATE), replace=False)
 
+Sample a group of infected people as traced by primary contact tracing.  
+The sampling frame was the individuals infected with COVID.  
+Every infected person had a 20% chance of being traced to a source event by “primary contact tracing”. The sample size was 20% of the 100 infected individuals, which was 20 cases.  
+The sample was selected by simple random sampling.
+ppl.loc[ppl['infected'], 'traced'] = np.random.rand(sum(ppl['infected'])) < TRACE_SUCCESS
+
+The underlying distribution of the proportion of infected people appeared to be normal distribution, centred around 20% from attending the wedding event and 80% from attending a brunch.
+
+The original code is not reproducible.  
+To make your code reproducible, the random processes need to be controlled by a fixed seed.
 ```
 
 
@@ -39,9 +54,9 @@ Please write your explanation here...
     * Open a private window in your browser. Copy and paste the link to your pull request into the address bar. Make sure you can see your pull request properly. This helps the technical facilitator and learning support staff review your submission easily.
 
 Checklist:
-- [ ] Create a branch called `assignment-1`.
-- [ ] Ensure that the repository is public.
-- [ ] Review [the PR description guidelines](https://github.com/UofT-DSI/onboarding/blob/main/onboarding_documents/submissions.md#guidelines-for-pull-request-descriptions) and adhere to them.
-- [ ] Verify that the link is accessible in a private browser window.
+- [X] Create a branch called `assignment-1`.
+- [X] Ensure that the repository is public.
+- [X] Review [the PR description guidelines](https://github.com/UofT-DSI/onboarding/blob/main/onboarding_documents/submissions.md#guidelines-for-pull-request-descriptions) and adhere to them.
+- [X] Verify that the link is accessible in a private browser window.
 
 If you encounter any difficulties or have questions, please don't hesitate to reach out to our team via the help channel in Slack. Our Technical Facilitators and Learning Support staff are here to help you navigate any challenges.
